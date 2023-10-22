@@ -1,6 +1,6 @@
  <div class="login-brand">
-     <img src="{{ asset('img/stisla-fill.svg') }}"
+     <img src="{{ asset('img/logo-binus.png') }}"
          alt="logo"
-         width="100"
-         class="shadow-light rounded-circle">
+         width="150"
+         >
  </div>

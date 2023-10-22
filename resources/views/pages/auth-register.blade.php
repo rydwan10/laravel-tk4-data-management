@@ -15,22 +15,17 @@
         </div>
 
         <div class="card-body">
-            <form method="POST">
+            {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="frist_name">First Name</label>
-                        <input id="frist_name"
+                    <div class="form-group col-12">
+                        <label for="name">Name</label>
+                        <input id="name"
                             type="text"
                             class="form-control"
-                            name="frist_name"
+                            name="name"
                             autofocus>
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="last_name">Last Name</label>
-                        <input id="last_name"
-                            type="text"
-                            class="form-control"
-                            name="last_name">
                     </div>
                 </div>
 
@@ -60,16 +55,16 @@
                         </div>
                     </div>
                     <div class="form-group col-6">
-                        <label for="password2"
+                        <label for="password_confirmation"
                             class="d-block">Password Confirmation</label>
-                        <input id="password2"
+                        <input id="password_confirmation"
                             type="password"
                             class="form-control"
-                            name="password-confirm">
+                            name="password_confirmation">
                     </div>
                 </div>
 
-                <div class="form-divider">
+                {{-- <div class="form-divider">
                     Your Home
                 </div>
                 <div class="row">
@@ -102,7 +97,7 @@
                         <input type="text"
                             class="form-control">
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">

@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EOQController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserManageController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +20,58 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', '/dashboard-general-dashboard');
-
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 // Dashboard
-Route::get('/dashboard-general-dashboard', function () {
-    return view('pages.dashboard-general-dashboard', ['type_menu' => 'dashboard']);
+Route::get('/dashboard-general-dashboard', DashboardController::class . '@index')->name('dashboard');
+
+Route::middleware('auth')->group(function () {
 });
+
+// ROLES CRUD
+Route::get('/roles', RoleController::class . '@index')->name('roles.index');
+Route::get('/roles/create', RoleController::class . '@create')->name('roles.create');
+Route::post('/roles', RoleController::class . '@store')->name('roles.store');
+Route::get('/roles/{role}/edit', RoleController::class . '@edit')->name('roles.edit');
+Route::put('/roles/{role}', RoleController::class . '@update')->name('roles.update');
+Route::delete('/roles/{role}', RoleController::class . '@destroy')->name('roles.destroy');
+
+// USER CRUD
+Route::get('/users', UserManageController::class . '@index')->name('users.index');
+Route::get('/users/create', UserManageController::class . '@create')->name('users.create');
+Route::post('/users', UserManageController::class . '@store')->name('users.store');
+Route::get('/users/{user}/edit', UserManageController::class . '@edit')->name('users.edit');
+Route::put('/users/{user}', UserManageController::class . '@update')->name('users.update');
+Route::delete('/users/{user}', UserManageController::class . '@destroy')->name('users.destroy');
+
+// INVENTORY CRUD
+Route::get('/inventories', InventoryController::class . '@index')->name('inventories.index');
+Route::get('/inventories/create', InventoryController::class . '@create')->name('inventories.create');
+Route::post('/inventories', InventoryController::class . '@store')->name('inventories.store');
+Route::get('/inventories/{inventory}/edit', InventoryController::class . '@edit')->name('inventories.edit');
+Route::put('/inventories/{inventory}', InventoryController::class . '@update')->name('inventories.update');
+Route::delete('/inventories/{inventory}', InventoryController::class . '@destroy')->name('inventories.destroy');
+
+// ORDER CRUD
+Route::get('/orders', OrderController::class . '@index')->name('orders.index');
+Route::get('/orders/create', OrderController::class . '@create')->name('orders.create');
+Route::post('/orders', OrderController::class . '@store')->name('orders.store');
+Route::get('/orders/{order}/edit', OrderController::class . '@edit')->name('orders.edit');
+Route::put('/orders/{order}', OrderController::class . '@update')->name('orders.update');
+Route::delete('/orders/{order}', OrderController::class . '@destroy')->name('orders.destroy');
+
+
+// EOQ
+Route::get('/eoq', EOQController::class . '@index')->name('eoq.index');
+// Route::get('/role-index', function () {
+//     return view('pages.role.role-index');
+// })->name('role.index');
+
+
+// ========
 Route::get('/dashboard-ecommerce-dashboard', function () {
     return view('pages.dashboard-ecommerce-dashboard', ['type_menu' => 'dashboard']);
 });
@@ -196,7 +249,7 @@ Route::get('/auth-forgot-password', function () {
 });
 Route::get('/auth-login', function () {
     return view('pages.auth-login', ['type_menu' => 'auth']);
-});
+})->name('auth-login');
 Route::get('/auth-login2', function () {
     return view('pages.auth-login2', ['type_menu' => 'auth']);
 });
@@ -259,3 +312,5 @@ Route::get('/utilities-subscribe', function () {
 Route::get('/credits', function () {
     return view('pages.credits', ['type_menu' => '']);
 });
+
+require __DIR__ . '/auth.php';

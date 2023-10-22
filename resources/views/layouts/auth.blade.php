@@ -53,7 +53,7 @@
                         @yield('main')
 
                         <!-- Footer -->
-                        @include('components.auth-footer')
+                        {{-- @include('components.auth-footer') --}}
                     </div>
                 </div>
             </div>
